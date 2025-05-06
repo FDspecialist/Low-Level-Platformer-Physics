@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a17f78bc-2ddf-4e31-acf1-933018f80641" name="Changes" comment="Baseplate, object with key inputs">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/player.py" afterDir="false" />
-    </list>
+    <list default="true" id="a17f78bc-2ddf-4e31-acf1-933018f80641" name="Changes" comment="Early collision handling" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,11 +77,20 @@
       <option name="project" value="LOCAL" />
       <updated>1746145432434</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Early collision handling">
+      <option name="closed" value="true" />
+      <created>1746197403248</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1746197403248</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Baseplate, object with key inputs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Baseplate, object with key inputs" />
+    <MESSAGE value="Early collision handling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Early collision handling" />
   </component>
 </project>
