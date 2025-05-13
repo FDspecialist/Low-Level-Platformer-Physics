@@ -1,14 +1,15 @@
 import pygame
 import math
+from physics_behaviours import Physics
 pygame.init()
 class Player:
-    def __init__(self,x,y):
+    def __init__(self,x,y, physics):
+        self.physics = physics
         self.body = pygame.Surface((50,50))
         self.rect = self.body.get_rect()
         self.body.fill((255,255,255))
-        self.x = x
-        self.y = y
-        self.velocity = 1
+        self.pos = pygame.Vector2(self.rect.topleft)
+        self.velocity = pygame.Vector2(10,10)
         self.dx = 0
         self.dy = 0
 
@@ -20,8 +21,6 @@ class Player:
         self.dy = 0
         if keys[pygame.K_w]:
             self.dy = -1
-        if keys[pygame.K_s]:
-            self.dy = 1
         if keys[pygame.K_a]:
             self.dx = -1
         if keys[pygame.K_d]:
@@ -33,24 +32,15 @@ class Player:
             self.dy /= norm
 
     def follow_cursor(self,MouseX, MouseY):
-        self.x, self.y = MouseX, MouseY
-
-    def check_base_collisions(self,base_rect):
-        if self.rect.colliderect(base_rect):
-            self.base_contact = True
-        else:
-            self.base_contact = False
+        self.pos= (MouseX, MouseY)
 
     def update(self):
-        if self.base_contact:
-            if self.dy == 1:
-                self.dy = 0
-
-        self.x += self.dx * self.velocity
-        self.y += self.dy * self.velocity
-
-        self.rect.x = self.x
-        self.rect.y = self.y
+        #apply gravity
+        self.physics.gravity(self.velocity)
+        if self.dy != -1:
+            self.dy = 1
+        self.pos.x += self.dx * self.velocity.x
+        self.pos.y += self.dy * self.velocity.y
 
     def draw(self,screen):
-        screen.blit(self.body,(self.x,self.y))
+        screen.blit(self.body,(self.pos.x,self.pos.y))

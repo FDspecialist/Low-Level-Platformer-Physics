@@ -2,6 +2,7 @@ from operator import truediv
 
 import pygame
 import sys
+from physics_behaviours import Physics
 from configs import Configs
 from player import Player
 
@@ -10,11 +11,12 @@ class Game:
         self.Configs = Configs()
         self.Screen = pygame.display.set_mode((self.Configs.SCREEN_WIDTH, self.Configs.SCREEN_HEIGHT))
         self.Layout = pygame.Surface((self.Configs.SCREEN_WIDTH,self.Configs.SCREEN_HEIGHT))
-        self.Layout.fill((0,0,0))
         self.Screen.fill((0,0,0))
         pygame.display.set_caption("Low Level Platformer")
         self.clock = self.Configs.clock
-        self.clock.tick(60)
+
+        #game physics
+        self.Physics = Physics(self.clock)
         #game structures
         self.Baseplate = pygame.Surface((1200,100))
         self.Baseplate.fill((125,125,125))
@@ -22,7 +24,7 @@ class Game:
         self.BaseRect.x = 0
         self.BaseRect.y = self.Configs.SCREEN_HEIGHT - 100
 
-        self.Player = Player(250,250)
+        self.Player = Player(250,250, self.Physics)
 
     def run(self):
         running = True
@@ -39,19 +41,16 @@ class Game:
             mx, my = mouse_pos
             self.Player.key_input(player_keys)
             #self.Player.follow_cursor(mx,my)
-            self.Player.check_base_collisions(self.BaseRect)
             self.Player.update()
-            print(self.Player.rect)
             self.draw()
+            self.clock.tick(60)
             pygame.display.flip()
         pygame.quit()
         sys.exit()
     def draw(self):
-        FinalDisplay = self.Layout.copy()
-        FinalDisplay.blit(self.Baseplate, (0,self.Configs.SCREEN_HEIGHT - 100))
-
-        self.Player.draw(FinalDisplay)
-        self.Screen.blit(FinalDisplay,(0,0))
+        self.Screen.fill((0,0,0))
+        self.Screen.blit(self.Baseplate, (0,self.Configs.SCREEN_HEIGHT - 100))
+        self.Player.draw(self.Screen)
 
 
 if __name__ == '__main__':
